@@ -53,3 +53,6 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+out/artifacts/ParseTree_jar/ParseTree.jar
+out/production/ParseTree/libs/DependencyParser.jar
+out/production/ParseTree/libs/Dictionary.jar

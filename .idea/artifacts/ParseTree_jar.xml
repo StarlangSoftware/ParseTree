@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="ParseTree:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/ParseTree_jar</output-path>
-    <root id="archive" name="ParseTree.jar">
-      <element id="module-output" name="ParseTree" />
-    </root>
-  </artifact>
-</component>
