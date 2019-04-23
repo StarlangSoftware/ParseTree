@@ -93,8 +93,6 @@ public class TreeBank {
                 }
                 line = br.readLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,6 +125,7 @@ public class TreeBank {
             }
             fw.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
