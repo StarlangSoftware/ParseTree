@@ -4,6 +4,7 @@ import DependencyParser.UniversalDependencyRelation;
 import ParseTree.NodeCondition.IsEnglishLeaf;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -52,7 +53,7 @@ public class ParseTree{
      */
     public ParseTree(FileInputStream file){
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(file, "UTF8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
             String line = br.readLine();
             if (line.contains("(") && line.contains(")")) {
                 line = line.substring(line.indexOf("(") + 1, line.lastIndexOf(")")).trim();

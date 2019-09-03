@@ -97,7 +97,7 @@ public class TreeBank {
         int parenthesisCount = 0;
         parseTrees = new ArrayList<ParseTree>();
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
             line = br.readLine();
             treeLine = "";
             while (line != null){
