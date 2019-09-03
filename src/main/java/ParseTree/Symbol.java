@@ -18,14 +18,26 @@ public class Symbol extends Word {
             Arrays.asList("VB", "VBD", "VBG", "VBN","VBP", "VBZ", "VERB"));
     String VPLabel = "VP";
 
+    /**
+     * Constructor for Symbol class. Sets the name attribute.
+     * @param name Name attribute
+     */
     public Symbol(String name){
         super(name);
     }
 
+    /**
+     * Checks if this symbol is a verb type.
+     * @return True if the symbol is a verb, false otherwise.
+     */
     public boolean isVerb(){
         return verbLabels.contains(name);
     }
 
+    /**
+     * Checks if the symbol is VP or not.
+     * @return True if the symbol is VB, false otherwise.
+     */
     public boolean isVP(){
         if (name.equals(VPLabel)){
             return true;
@@ -33,6 +45,11 @@ public class Symbol extends Word {
         return false;
     }
 
+    /**
+     * Checks if this symbol is a terminal symbol or not. A symbol is terminal if it is a punctuation symbol, or
+     * if it starts with a lowercase symbol.
+     * @return True if this symbol is a terminal symbol, false otherwise.
+     */
     public boolean isTerminal(){
         int i;
         if (name.equals(",") || name.equals(".") || name.equals("!") || name.equals("?") || name.equals(":")
@@ -51,12 +68,21 @@ public class Symbol extends Word {
         return false;
     }
 
+    /**
+     * Checks if this symbol can be a chunk label or not.
+     * @return True if this symbol can be a chunk label, false otherwise.
+     */
     public boolean isChunkLabel(){
         if (Word.isPunctuation(name) || sentenceLabels.contains(name.replaceAll("-.*","")) || phraseLabels.contains(name.replaceAll("-.*", "")))
             return true;
         return false;
     }
 
+    /**
+     * If the symbol's data contains '-' or '=', this method trims all characters after those characters and returns
+     * the resulting string.
+     * @return Trimmed symbol.
+     */
     public Symbol trimSymbol(){
         int minusIndex, equalIndex;
         if (name.startsWith("-") || (!name.contains("-") && !name.contains("="))){

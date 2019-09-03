@@ -40,9 +40,19 @@ public class ParseNode {
     private static String[] NP4 = new String[]{"CD"};
     private static String[] NP5 = new String[]{"JJ" , "JJS", "RB", "QP"};
 
+    /**
+     * Empty constructor for ParseNode class.
+     */
     public ParseNode() {
     }
 
+    /**
+     * Constructs a ParseNode from a single line. If the node is a leaf node, it only sets the data. Otherwise, splits
+     * the line w.r.t. spaces and paranthesis and calls itself resursively to generate its child parseNodes.
+     * @param parent The parent node of this node.
+     * @param line The input line to create this parseNode.
+     * @param isLeaf True, if this node is a leaf node; false otherwise.
+     */
     public ParseNode(ParseNode parent, String line, boolean isLeaf){
         int parenthesisCount = 0;
         String childLine = "";
@@ -78,6 +88,13 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Another simple constructor for ParseNode. It takes inputs left and right children of this node, and the data.
+     * Sets the corresponding attributes with these inputs.
+     * @param left Left child of this node.
+     * @param right Right child of this node.
+     * @param data Data for this node.
+     */
     public ParseNode(ParseNode left, ParseNode right, Symbol data){
         children = new ArrayList<ParseNode>();
         children.add(left);
@@ -87,6 +104,12 @@ public class ParseNode {
         this.data = data;
     }
 
+    /**
+     * Another simple constructor for ParseNode. It takes inputs left child of this node and the data.
+     * Sets the corresponding attributes with these inputs.
+     * @param left Left child of this node.
+     * @param data Data for this node.
+     */
     public ParseNode(ParseNode left, Symbol data){
         children = new ArrayList<ParseNode>();
         children.add(left);
@@ -94,11 +117,24 @@ public class ParseNode {
         this.data = data;
     }
 
+    /**
+     * Another simple constructor for ParseNode. It only take input the data, and sets it.
+     * @param data Data for this node.
+     */
     public ParseNode(Symbol data){
         children = new ArrayList<ParseNode>();
         this.data = data;
     }
 
+    /**
+     * Extracts the head of the children of this current node.
+     * @param priorityList Depending on the pos of current node, the priorities among the children are given with this parameter
+     * @param direction Depending on the pos of the current node, search direction is either from left to right, or from
+     *                  right to left.
+     * @param defaultCase If true, and no child appears in the priority list, returns first child on the left, or first
+     *                    child on the right depending on the search direction.
+     * @return Head node of the children of the current node
+     */
     private ParseNode searchHeadChild(String[] priorityList, SearchDirectionType direction, boolean defaultCase){
         switch (direction){
             case LEFT:
@@ -129,6 +165,12 @@ public class ParseNode {
         return null;
     }
 
+    /**
+     * If current node is not a leaf, it has one or more children, this method determines recursively the head of
+     * that (those) child(ren). Otherwise, it returns itself. In this way, this method returns the head of all leaf
+     * successors.
+     * @return Head node of the descendant leaves of this current node.
+     */
     public ParseNode headLeaf(){
         if (children.size() > 0){
             ParseNode head = headChild();
@@ -142,6 +184,11 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Calls searchHeadChild to determine the head node of all children of this current node. The search direction and
+     * the search priority list is determined according to the symbol in this current parent node.
+     * @return Head node among its children of this current node.
+     */
     public ParseNode headChild(){
         ParseNode result;
         switch (data.trimSymbol().toString()){
@@ -229,15 +276,26 @@ public class ParseNode {
     public void constructUniversalDependencies(HashMap<ParseNode, UniversalDependencyRelation> dependencies){
     }
 
+    /**
+     * Returns an iterator for the child nodes of this {@link ParseNode}.
+     * @return Iterator for the children of thid very node.
+     */
     public Iterator<ParseNode> getChildIterator(){
          return children.iterator();
     }
 
+    /**
+     * Adds a child node at the end of the children node list.
+     * @param child Child node to be added.
+     */
     public void addChild(ParseNode child){
         children.add(child);
         child.parent = this;
     }
 
+    /**
+     * Recursive method to restore the parents of all nodes below this node in the hierarchy.
+     */
     public void correctParents(){
         for (ParseNode child : children){
             child.parent = this;
@@ -245,6 +303,10 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive method to remove all nodes starting with the symbol X. If the node is removed, its children are
+     * connected to the next sibling of the deleted node.
+     */
     public void removeXNodes(){
         int i = 0;
         while (i < children.size()){
@@ -260,15 +322,29 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Adds a child node at the given specific index in the children node list.
+     * @param index Index where the new child node will be added.
+     * @param child Child node to be added.
+     */
     public void addChild(int index, ParseNode child){
         children.add(index, child);
         child.parent = this;
     }
 
+    /**
+     * Replaces a child node at the given specific with a new child node.
+     * @param index Index where the new child node replaces the old one.
+     * @param child Child node to be replaced.
+     */
     public void setChild(int index, ParseNode child){
         children.set(index, child);
     }
 
+    /**
+     * Removes a given child from children node list.
+     * @param child Child node to be deleted.
+     */
     public void removeChild(ParseNode child){
         for (int i = 0; i < children.size(); i++){
             if (children.get(i) == child){
@@ -278,6 +354,10 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive method to calculate the number of all leaf nodes in the subtree rooted with this current node.
+     * @return Number of all leaf nodes in the current subtree.
+     */
     public int leafCount(){
         if (children.size() == 0){
             return 1;
@@ -290,6 +370,10 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive method to calculate the number of all nodes in the subtree rooted with this current node.
+     * @return Number of all nodes in the current subtree.
+     */
     public int nodeCount(){
         if (children.size() > 0){
             int sum = 1;
@@ -302,6 +386,11 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive method to calculate the number of all nodes, which have more than one children, in the subtree rooted
+     * with this current node.
+     * @return Number of all nodes, which have more than one children, in the current subtree.
+     */
     public int nodeCountWithMultipleChildren(){
         if (children.size() > 1){
             int sum = 1;
@@ -314,6 +403,9 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive method to remove all punctuation nodes from the current subtree.
+     */
     public void stripPunctuation(){
         Iterator<ParseNode> iterator = children.iterator();
         while (iterator.hasNext()){
@@ -324,26 +416,53 @@ public class ParseNode {
             node.stripPunctuation();
     }
 
+    /**
+     * Returns number of children of this node.
+     * @return Number of children of this node.
+     */
     public int numberOfChildren(){
         return children.size();
     }
 
+    /**
+     * Returns the i'th child of this node.
+     * @param i Index of the retrieved node.
+     * @return i'th child of this node.
+     */
     public ParseNode getChild(int i){
         return children.get(i);
     }
 
+    /**
+     * Returns the first child of this node.
+     * @return First child of this node.
+     */
     public ParseNode firstChild(){
         return children.get(0);
     }
 
+    /**
+     * Returns the last child of this node.
+     * @return Last child of this node.
+     */
     public ParseNode lastChild(){
         return children.get(children.size() - 1);
     }
 
+    /**
+     * Checks if the given node is the last child of this node.
+     * @param child To be checked node.
+     * @return True, if child is the last child of this node, false otherwise.
+     */
     public boolean isLastChild(ParseNode child){
         return children.get(children.size() - 1) == child;
     }
 
+    /**
+     * Returns the previous sibling (sister) of this node.
+     * @return If this is the first child of its parent, returns null. Otherwise, returns the previous sibling of this
+     * node.
+     */
     public ParseNode previousSibling(){
         for (int i = 1; i < parent.children.size(); i++){
             if (parent.children.get(i) == this){
@@ -353,6 +472,11 @@ public class ParseNode {
         return null;
     }
 
+    /**
+     * Returns the next sibling (sister) of this node.
+     * @return If this is the last child of its parent, returns null. Otherwise, returns the next sibling of this
+     * node.
+     */
     public ParseNode nextSibling(){
         for (int i = 0; i < parent.children.size() - 1; i++){
             if (parent.children.get(i) == this){
@@ -362,18 +486,35 @@ public class ParseNode {
         return null;
     }
 
+    /**
+     * Accessor for the parent attribute.
+     * @return Parent of this node.
+     */
     public ParseNode getParent(){
         return parent;
     }
 
+    /**
+     * Accessor for the data attribute.
+     * @return Data of this node.
+     */
     public Symbol getData(){
         return data;
     }
 
+    /**
+     * Mutator of the data attribute.
+     * @param data Data to be set.
+     */
     public void setData(Symbol data){
         this.data = data;
     }
 
+    /**
+     * Recursive function to count the number of words in the subtree rooted at this node.
+     * @param excludeStopWords If true, stop words are not counted.
+     * @return Number of words in the subtree rooted at this node.
+     */
     public int wordCount(boolean excludeStopWords){
         int sum;
         if (children.size() == 0){
@@ -413,14 +554,26 @@ public class ParseNode {
         return sum;
     }
 
+    /**
+     * Returns true if this node is leaf, false otherwise.
+     * @return true if this node is leaf, false otherwise.
+     */
     public boolean isLeaf(){
         return children.size() == 0;
     }
 
+    /**
+     * Returns true if this node does not contain a meaningful data, false otherwise.
+     * @return true if this node does not contain a meaningful data, false otherwise.
+     */
     public boolean isDummyNode(){
         return getData().getName().contains("*") || (getData().getName().equals("0") && parent.getData().getName().equals("-NONE-"));
     }
 
+    /**
+     * Recursive function to convert the subtree rooted at this node to a sentence.
+     * @return A sentence which contains all words in the subtree rooted at this node.
+     */
     public String toSentence(){
         if (children.size() == 0){
             if (getData() != null && !isDummyNode()){
@@ -437,6 +590,10 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive function to convert the subtree rooted at this node to a string.
+     * @return A string which contains all words in the subtree rooted at this node.
+     */
     public String toString(){
         if (children.size() < 2){
             if (children.size() < 1){
@@ -453,6 +610,11 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Swaps the given child node of this node with the previous sibling of that given node. If the given node is the
+     * leftmost child, it swaps with the last node.
+     * @param node Node to be swapped.
+     */
     public void moveLeft(ParseNode node){
         int i;
         for (i = 0; i < children.size(); i++) {
@@ -470,6 +632,10 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Recursive function to concatenate the data of the all ascendant nodes of this node to a string.
+     * @return A string which contains all data of all the ascendant nodes of this node.
+     */
     public String ancestorString(){
         if (parent == null){
             return data.getName();
@@ -478,6 +644,11 @@ public class ParseNode {
         }
     }
 
+    /**
+     * Swaps the given child node of this node with the next sibling of that given node. If the given node is the
+     * rightmost child, it swaps with the first node.
+     * @param node Node to be swapped.
+     */
     public void moveRight(ParseNode node){
         int i;
         for (i = 0; i < children.size(); i++) {
