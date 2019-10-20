@@ -459,6 +459,31 @@ public class ParseNode {
     }
 
     /**
+     * Returns the index of the given child of this node.
+     * @return Index of the child of this node.
+     */
+    public int getChildIndex(ParseNode child){
+        return children.indexOf(child);
+    }
+
+    /**
+     * Returns true if the given node is a descendant of this node.
+     * @return True if the given node is descendant of this node.
+     */
+    public boolean isDescendant(ParseNode node){
+        for (ParseNode aChild : children){
+            if (aChild.equals(node)){
+                return true;
+            } else {
+                if (aChild.isDescendant(node)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns the previous sibling (sister) of this node.
      * @return If this is the first child of its parent, returns null. Otherwise, returns the previous sibling of this
      * node.
