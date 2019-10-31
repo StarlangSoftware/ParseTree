@@ -9,7 +9,6 @@ public class ParseNode {
 
     protected ArrayList<ParseNode> children;
     protected ParseNode parent = null;
-    protected int childIndex = -1;
     protected Symbol data = null;
     private static String[] ADJP = new String[]{"NNS", "QP", "NN", "$", "ADVP", "JJ", "VBN", "VBG", "ADJP", "JJR", "NP", "JJS", "DT", "FW", "RBR", "RBS", "SBAR", "RB"};
     private static String[] ADVP = new String[]{"RB", "RBR", "RBS", "FW", "ADVP", "TO", "CD", "JJR", "JJ", "IN", "NP", "JJS", "NN"};
@@ -57,9 +56,6 @@ public class ParseNode {
         int parenthesisCount = 0;
         String childLine = "";
         this.parent = parent;
-        if (parent != null){
-            this.childIndex = parent.children.size() - 1;
-        }
         children = new ArrayList<ParseNode>();
         if (isLeaf){
             data = new Symbol(line);
