@@ -1,7 +1,6 @@
 package ParseTree;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -88,46 +87,6 @@ public class TreeBank {
     }
 
     /**
-     * An obsolete constructor of the {@link TreeBank} class. If the contents of all the parseTree's are inside a single
-     * file, this constructor can be called. Each line in this file corresponds to a single ParseTree.
-     * @param fileName File containing the parse trees.
-     */
-    public TreeBank(String fileName){
-        String line, treeLine;
-        int parenthesisCount = 0;
-        parseTrees = new ArrayList<ParseTree>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
-            line = br.readLine();
-            treeLine = "";
-            while (line != null){
-                if (!line.isEmpty()){
-                    for (int i = 0; i < line.length(); i++){
-                        if (line.charAt(i) == '('){
-                            parenthesisCount++;
-                        } else {
-                            if (line.charAt(i) == ')'){
-                                parenthesisCount--;
-                            }
-                        }
-                    }
-                    treeLine = treeLine + line;
-                    if (parenthesisCount == 0){
-                        ParseTree tree = new ParseTree(treeLine);
-                        if (tree.getRoot() != null){
-                            parseTrees.add(tree);
-                        }
-                        treeLine = "";
-                    }
-                }
-                line = br.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Strips punctuation symbols from all parseTrees in this TreeBank.
      */
     public void stripPunctuation(){
@@ -156,25 +115,6 @@ public class TreeBank {
             count += tree.wordCount(excludeStopWords);
         }
         return count;
-    }
-
-    /**
-     * Another obsolete function of the {@link TreeBank} class. If the contents of all the parseTree's must be inside a
-     * single file, this function saves all the ParseTree's in a single file. Each line in this file corresponds to a
-     * single ParseTree.
-     * @param fileName Output file that will contain the parse trees.
-     */
-    public void save(String fileName){
-        BufferedWriter fw;
-        try {
-            fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8));
-            for (ParseTree tree:parseTrees){
-                fw.write("( " + tree.toString() + " )\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

@@ -39,10 +39,7 @@ public class Symbol extends Word {
      * @return True if the symbol is VB, false otherwise.
      */
     public boolean isVP(){
-        if (name.equals(VPLabel)){
-            return true;
-        }
-        return false;
+        return name.equals(VPLabel);
     }
 
     /**

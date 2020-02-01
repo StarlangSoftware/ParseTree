@@ -31,22 +31,6 @@ public class ParseTree{
     }
 
     /**
-     * Original constructor of the ParseTree. The method takes the line containing the information about the nodes as
-     * input and calls the ParseNode constructor recursively to generate to whole tree.
-     * @param line String that contains the tree information
-     */
-    public ParseTree(String line){
-        line = line.replaceAll("\\n", "");
-        line = line.replaceAll("\\t", "");
-        if (line.contains("(") && line.lastIndexOf(")") != -1){
-            line = line.substring(line.indexOf("(") + 1, line.lastIndexOf(")")).trim();
-            root = new ParseNode(null, line, false);
-        } else {
-            root = null;
-        }
-    }
-
-    /**
      * Another constructor of the ParseTree. The method takes the file containing a single line as input and constructs
      * the whole tree by calling the ParseNode constructor recursively.
      * @param file File containing a single line for a ParseTree

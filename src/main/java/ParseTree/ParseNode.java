@@ -403,11 +403,7 @@ public class ParseNode {
      * Recursive method to remove all punctuation nodes from the current subtree.
      */
     public void stripPunctuation(){
-        Iterator<ParseNode> iterator = children.iterator();
-        while (iterator.hasNext()){
-            if (Word.isPunctuation(iterator.next().getData().getName()))
-                iterator.remove();
-        }
+        children.removeIf(parseNode -> Word.isPunctuation(parseNode.getData().getName()));
         for (ParseNode node: children)
             node.stripPunctuation();
     }
