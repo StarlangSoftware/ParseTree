@@ -127,7 +127,7 @@ public class ParseTree{
     public void save(String fileName){
         BufferedWriter fw;
         try {
-            fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
+            fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8));
             fw.write("( " + this.toString() + " )\n");
             fw.close();
         } catch (IOException e) {
