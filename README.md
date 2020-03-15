@@ -140,7 +140,7 @@ Bir ParseTree'nin düğüm sayısını
 	
 yaprak sayısını 
 
-	int leafCount
+	int leafCount()
 	
 içinde yer alan kelime sayısını da
 
