@@ -74,19 +74,76 @@ Use below line to generate jar file:
 
      mvn install
 
-
-
-------------------------------------------------
-
-ParseTree
-============
-+ [Maven Usage](#maven-usage)
-
-
-### Maven Usage
+## Maven Usage
 
 	<dependency>
   	<groupId>NlpToolkit</groupId>
   	<artifactId>ParseTree</artifactId>
   	<version>1.0.2</version>
 	</dependency>
+
+
+------------------------------------------------
+
+Detailed Description
+============
++ [TreeBank](#treebank)
++ [ParseTree](#parsetree)
+
+## TreeBank
+
+Kaydedilmiş ParseTreelerden oluşan bir TreeBank'ı belirli bir klasörden yüklemek için
+
+	TreeBank(File folder)
+
+bir klasördeki ağaçlardan ismi belirli bir örüntüye sahip ağaçları yüklemek için
+
+	TreeBank(File folder, String pattern)
+	
+bir klasördeki ağaçlardan ismi belirli bir örüntüye sahip ve numaraları da belirli bir aralıkta olanları yüklemek için ise
+
+	TreeBank(File folder, String pattern, int from, int to)
+	
+kullanılır. Örneğin
+
+	a = TreeBank(new File("/mypath"));
+
+o anda bulunan klasörün altındaki "mypath" klasörünün altındaki ağaçları yüklemek için kullanılır. Aynı klasörün altındaki sadece "train" uzantılı ağaçlar yüklenecekse, 
+
+	a = TreeBank(new File("/mypath"), ".train");
+
+bu ağaçlardan sadece 1 ile 500 arasındaki ağaçlar yüklenecekse de
+
+	a = TreeBank(new File("/mypath"), ".train", 1, 500);
+
+kullanılır.
+
+TreeBank yüklendikten sonra ağaçlar üstünde gezmek için ise,
+
+	for (int i = 0; i < a.size(); i++){
+		ParseTree p = a.get(i);
+	}
+	
+gibi bir kod kullanılabilir.
+
+## ParseTree
+
+Kaydedilmiş bir ParseTree'yi yüklemek için
+
+	ParseTree(FileInputStream file)
+	
+kullanılır. Genel olarak tek tek ParseTree yüklemek yerine yukarıda anlatıldığı gibi bir TreeBank yüklemek daha mantıklıdır.
+
+Bir ParseTree'nin düğüm sayısını
+
+	int nodeCount()
+	
+yaprak sayısını 
+
+	int leafCount
+	
+içinde yer alan kelime sayısını da
+
+	int wordCount(boolean excludeStopWords)
+	
+metodları ile bulabiliriz.
