@@ -1,8 +1,10 @@
 # ParseTree
+
 For Developers
 ============
-You can also see either [Python](https://github.com/olcaytaner/ParseTree-Py) 
-or [C++](https://github.com/olcaytaner/ParseTree-CPP) repository.
+
+You can also see [Python](https://github.com/starlangsoftware/ParseTree-Py), [C++](https://github.com/starlangsoftware/ParseTree-CPP), or [C#](https://github.com/starlangsoftware/ParseTree-CS) repository.
+
 ## Requirements
 
 * [Java Development Kit 8 or higher](#java), Open JDK or Oracle JDK
