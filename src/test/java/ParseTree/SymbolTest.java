@@ -1,7 +1,6 @@
 package ParseTree;
 
 import org.junit.Test;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import static org.junit.Assert.*;
 

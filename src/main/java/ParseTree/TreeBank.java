@@ -19,6 +19,7 @@ public class TreeBank {
     /**
      * A constructor of {@link TreeBank} class which reads all {@link ParseTree} files inside the given folder. For each
      * file inside that folder, the constructor creates a ParseTree and puts in inside the list parseTrees.
+     * @param folder Folder where all parseTrees reside.
      */
     public TreeBank(File folder){
         parseTrees = new ArrayList<ParseTree>();

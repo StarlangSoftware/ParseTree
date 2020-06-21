@@ -448,6 +448,7 @@ public class ParseNode {
 
     /**
      * Returns the index of the given child of this node.
+     * @param child Child whose index shoud be returned.
      * @return Index of the child of this node.
      */
     public int getChildIndex(ParseNode child){
@@ -456,6 +457,7 @@ public class ParseNode {
 
     /**
      * Returns true if the given node is a descendant of this node.
+     * @param node Node to check if it is descendant of this node.
      * @return True if the given node is descendant of this node.
      */
     public boolean isDescendant(ParseNode node){
