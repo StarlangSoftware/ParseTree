@@ -1,6 +1,5 @@
 package ParseTree;
 
-import DependencyParser.UniversalDependencyRelation;
 import Dictionary.*;
 
 import java.util.*;
@@ -269,9 +268,6 @@ public class ParseNode {
         return null;
     }
 
-    public void constructUniversalDependencies(HashMap<ParseNode, UniversalDependencyRelation> dependencies){
-    }
-
     /**
      * Returns an iterator for the child nodes of this {@link ParseNode}.
      * @return Iterator for the children of thid very node.
@@ -538,24 +534,24 @@ public class ParseNode {
             if (!excludeStopWords){
                 sum = 1;
             } else {
-                if (data.getName().equalsIgnoreCase(",") || data.getName().equalsIgnoreCase(".") || data.getName().equalsIgnoreCase(";")
+                if (Word.isPunctuation(data.getName())
                         || data.getName().contains("*") || data.getName().equalsIgnoreCase("at") || data.getName().equalsIgnoreCase("the")
                         || data.getName().equalsIgnoreCase("to") || data.getName().equalsIgnoreCase("a") || data.getName().equalsIgnoreCase("an")
                         || data.getName().equalsIgnoreCase("not") || data.getName().equalsIgnoreCase("is") || data.getName().equalsIgnoreCase("was")
                         || data.getName().equalsIgnoreCase("were") || data.getName().equalsIgnoreCase("have") || data.getName().equalsIgnoreCase("had")
-                        || data.getName().equalsIgnoreCase("has") || data.getName().equalsIgnoreCase("!") || data.getName().equalsIgnoreCase("?")
+                        || data.getName().equalsIgnoreCase("has")
                         || data.getName().equalsIgnoreCase("by") || data.getName().equalsIgnoreCase("at") || data.getName().equalsIgnoreCase("on")
                         || data.getName().equalsIgnoreCase("off") || data.getName().equalsIgnoreCase("'s") || data.getName().equalsIgnoreCase("n't")
                         || data.getName().equalsIgnoreCase("can") || data.getName().equalsIgnoreCase("could") || data.getName().equalsIgnoreCase("may")
                         || data.getName().equalsIgnoreCase("might") || data.getName().equalsIgnoreCase("will") || data.getName().equalsIgnoreCase("would")
-                        || data.getName().equalsIgnoreCase("''") || data.getName().equalsIgnoreCase("'") || data.getName().equalsIgnoreCase("\"")
-                        || data.getName().equalsIgnoreCase("\"\"") || data.getName().equalsIgnoreCase("as") || data.getName().equalsIgnoreCase("with")
+                        || data.getName().equalsIgnoreCase("as") || data.getName().equalsIgnoreCase("with")
                         || data.getName().equalsIgnoreCase("for") || data.getName().equalsIgnoreCase("will") || data.getName().equalsIgnoreCase("would")
-                        || data.getName().equalsIgnoreCase("than") || data.getName().equalsIgnoreCase("``") || data.getName().equalsIgnoreCase("$")
+                        || data.getName().equalsIgnoreCase("than") || data.getName().equalsIgnoreCase("$")
                         || data.getName().equalsIgnoreCase("and") || data.getName().equalsIgnoreCase("or") || data.getName().equalsIgnoreCase("of")
                         || data.getName().equalsIgnoreCase("are") || data.getName().equalsIgnoreCase("be") || data.getName().equalsIgnoreCase("been")
                         || data.getName().equalsIgnoreCase("do") || data.getName().equalsIgnoreCase("few") || data.getName().equalsIgnoreCase("there")
-                        || data.getName().equalsIgnoreCase("up") || data.getName().equalsIgnoreCase("down")) {
+                        || data.getName().equalsIgnoreCase("up") || data.getName().equalsIgnoreCase("down") || data.getName().equalsIgnoreCase("in")
+                        || data.getName().equalsIgnoreCase("'re")) {
                     sum = 0;
                 } else {
                     sum = 1;
@@ -596,7 +592,11 @@ public class ParseNode {
             if (getData() != null && !isDummyNode()){
                 return " " + getData().getName().replaceAll("-LRB-", "(").replaceAll("-RRB-", ")").replaceAll("-LSB-", "[").replaceAll("-RSB-", "]").replaceAll("-LCB-", "{").replaceAll("-RCB-", "}").replaceAll("-lrb-", "(").replaceAll("-rrb-", ")").replaceAll("-lsb-", "[").replaceAll("-rsb-", "]").replaceAll("-lcb-", "{").replaceAll("-rcb-", "}");
             } else {
-                return " ";
+                if (isDummyNode()){
+                    return "";
+                } else {
+                    return " ";
+                }
             }
         } else {
             String st = "";

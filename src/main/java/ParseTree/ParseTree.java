@@ -1,13 +1,11 @@
 package ParseTree;
 
-import DependencyParser.UniversalDependencyRelation;
 import ParseTree.NodeCondition.IsEnglishLeaf;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class ParseTree{
     private static ArrayList<String> sentenceLabels = new ArrayList<String>(
@@ -81,12 +79,6 @@ public class ParseTree{
             }
         }
         return null;
-    }
-
-    public HashMap<ParseNode, UniversalDependencyRelation> constructUniversalDependencies(){
-        HashMap<ParseNode, UniversalDependencyRelation> universalDependencies = new HashMap<>();
-        root.constructUniversalDependencies(universalDependencies);
-        return universalDependencies;
     }
 
     /**
@@ -178,7 +170,7 @@ public class ParseTree{
      * @return A sentence which contains all words in the tree.
      */
     public String toSentence(){
-        return root.toSentence();
+        return root.toSentence().trim();
     }
 
     /**
