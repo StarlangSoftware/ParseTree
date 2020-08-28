@@ -77,4 +77,28 @@ public class ParseTreeTest {
         assertEquals("Ad Notes ... .", parseTree5.toSentence());
     }
 
+    @Test
+    public void testConstituentSpan(){
+        ConstituentSpan span = parseTree1.constituentSpanList().get(6);
+        assertEquals(new Symbol("PP-LOC"), span.getConstituent());
+        assertEquals(4, span.getStart());
+        assertEquals(9, span.getEnd());
+        span = parseTree2.constituentSpanList().get(10);
+        assertEquals(new Symbol("VB"), span.getConstituent());
+        assertEquals(7, span.getStart());
+        assertEquals(8, span.getEnd());
+        span = parseTree3.constituentSpanList().get(0);
+        assertEquals(new Symbol("S"), span.getConstituent());
+        assertEquals(1, span.getStart());
+        assertEquals(11, span.getEnd());
+        span = parseTree4.constituentSpanList().get(5);
+        assertEquals(new Symbol("ADVP"), span.getConstituent());
+        assertEquals(3, span.getStart());
+        assertEquals(4, span.getEnd());
+        span = parseTree5.constituentSpanList().get(4);
+        assertEquals(new Symbol("."), span.getConstituent());
+        assertEquals(4, span.getStart());
+        assertEquals(5, span.getEnd());
+    }
+
 }

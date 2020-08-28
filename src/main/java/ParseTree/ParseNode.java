@@ -570,6 +570,22 @@ public class ParseNode {
     }
 
     /**
+     * Construct recursively the constituent span list of a subtree rooted at this node.
+     * @param startIndex Start index of the leftmost leaf node of this subtree.
+     * @param list Returned span list.
+     */
+    void constituentSpanList(int startIndex, ArrayList<ConstituentSpan> list){
+        if (children.size() > 0){
+            list.add(new ConstituentSpan(data, startIndex, startIndex + leafCount()));
+        }
+        int total = 0;
+        for (ParseNode parseNode : children){
+            parseNode.constituentSpanList(startIndex + total, list);
+            total += parseNode.leafCount();
+        }
+    }
+
+    /**
      * Returns true if this node is leaf, false otherwise.
      * @return true if this node is leaf, false otherwise.
      */

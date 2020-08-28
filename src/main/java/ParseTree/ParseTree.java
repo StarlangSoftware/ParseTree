@@ -127,6 +127,18 @@ public class ParseTree{
     }
 
     /**
+     * Generates a list of constituents in the parse tree and their spans.
+     * @return A list of constituents in the parse tree and their spans.
+     */
+    public ArrayList<ConstituentSpan> constituentSpanList(){
+        ArrayList<ConstituentSpan> result = new ArrayList<ConstituentSpan>();
+        if (root != null){
+            root.constituentSpanList(1, result);
+        }
+        return result;
+    }
+
+    /**
      * Calls recursive method to restore the parents of all nodes in the tree.
      */
     public void correctParents(){
