@@ -26,7 +26,7 @@ public class NodeCollector {
      * @param collected The {@link ArrayList} where the collected ParseNode's will be stored.
      */
     private void collectNodes(ParseNode parseNode, ArrayList<ParseNode> collected){
-        if (condition.satisfies(parseNode)){
+        if (condition == null || condition.satisfies(parseNode)){
             collected.add(parseNode);
         } else {
             for (int i = 0; i < parseNode.numberOfChildren(); i++){
