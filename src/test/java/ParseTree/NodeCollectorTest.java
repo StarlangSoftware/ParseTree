@@ -40,6 +40,20 @@ public class NodeCollectorTest {
     }
 
     @Test
+    public void testCollectNode() {
+        NodeCollector nodeCollector1 = new NodeCollector(parseTree1.getRoot(), null);
+        assertEquals(34, nodeCollector1.collect().size());
+        nodeCollector1 = new NodeCollector(parseTree2.getRoot(), null);
+        assertEquals(39, nodeCollector1.collect().size());
+        nodeCollector1 = new NodeCollector(parseTree3.getRoot(), null);
+        assertEquals(32, nodeCollector1.collect().size());
+        nodeCollector1 = new NodeCollector(parseTree4.getRoot(), null);
+        assertEquals(28, nodeCollector1.collect().size());
+        nodeCollector1 = new NodeCollector(parseTree5.getRoot(), null);
+        assertEquals(9, nodeCollector1.collect().size());
+    }
+
+    @Test
     public void testCollectEnglish() {
         NodeCollector nodeCollector1 = new NodeCollector(parseTree1.getRoot(), new IsEnglishLeaf());
         assertEquals(13, nodeCollector1.collect().size());
