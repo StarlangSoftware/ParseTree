@@ -688,7 +688,11 @@ public class ParseNode {
         int i;
         for (i = 0; i < children.size(); i++) {
             if (children.get(i) == node){
-                Collections.swap(children, i, (i + 1) % children.size());
+                if (i == children.size() - 1){
+                    Collections.swap(children, 0, children.size() - 1);
+                } else {
+                    Collections.swap(children, i, (i + 1) % children.size());
+                }
                 return;
             }
         }
