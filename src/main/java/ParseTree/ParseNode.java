@@ -542,7 +542,7 @@ public class ParseNode {
                         || data.getName().equalsIgnoreCase("not") || data.getName().equalsIgnoreCase("is") || data.getName().equalsIgnoreCase("was")
                         || data.getName().equalsIgnoreCase("were") || data.getName().equalsIgnoreCase("have") || data.getName().equalsIgnoreCase("had")
                         || data.getName().equalsIgnoreCase("has")
-                        || data.getName().equalsIgnoreCase("by") || data.getName().equalsIgnoreCase("at") || data.getName().equalsIgnoreCase("on")
+                        || data.getName().equalsIgnoreCase("by") || data.getName().equalsIgnoreCase("on")
                         || data.getName().equalsIgnoreCase("off") || data.getName().equalsIgnoreCase("'s") || data.getName().equalsIgnoreCase("n't")
                         || data.getName().equalsIgnoreCase("can") || data.getName().equalsIgnoreCase("could") || data.getName().equalsIgnoreCase("may")
                         || data.getName().equalsIgnoreCase("might") || data.getName().equalsIgnoreCase("will") || data.getName().equalsIgnoreCase("would")
