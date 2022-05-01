@@ -6,7 +6,7 @@ import java.util.*;
 
 public class ParseNode {
 
-    protected ArrayList<ParseNode> children;
+    protected ArrayList<ParseNode> children = new ArrayList<>();
     protected ParseNode parent = null;
     protected Symbol data = null;
     private static String[] ADJP = new String[]{"NNS", "QP", "NN", "$", "ADVP", "JJ", "VBN", "VBG", "ADJP", "JJR", "NP", "JJS", "DT", "FW", "RBR", "RBS", "SBAR", "RB"};
@@ -55,7 +55,6 @@ public class ParseNode {
         int parenthesisCount = 0;
         String childLine = "";
         this.parent = parent;
-        children = new ArrayList<ParseNode>();
         if (isLeaf){
             data = new Symbol(line);
         } else {
@@ -91,7 +90,6 @@ public class ParseNode {
      * @param data Data for this node.
      */
     public ParseNode(ParseNode left, ParseNode right, Symbol data){
-        children = new ArrayList<ParseNode>();
         children.add(left);
         left.parent = this;
         children.add(right);
@@ -106,7 +104,6 @@ public class ParseNode {
      * @param data Data for this node.
      */
     public ParseNode(ParseNode left, Symbol data){
-        children = new ArrayList<ParseNode>();
         children.add(left);
         left.parent = this;
         this.data = data;
@@ -117,7 +114,6 @@ public class ParseNode {
      * @param data Data for this node.
      */
     public ParseNode(Symbol data){
-        children = new ArrayList<ParseNode>();
         this.data = data;
     }
 
