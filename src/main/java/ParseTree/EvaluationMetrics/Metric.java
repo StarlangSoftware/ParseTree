@@ -7,15 +7,11 @@ import java.io.File;
 
 public abstract class Metric {
 
-    protected TreeBank treeBank1, treeBank2;
+    public abstract double[][] calculate(File goldTrees, File computedTrees);
 
-    public Metric(File folder1, File folder2) {
-        treeBank1 = new TreeBank(folder1);
-        treeBank2 = new TreeBank(folder2);
-        calculate();
-    }
+    public abstract double[][] calculate(TreeBank goldTrees, TreeBank computedTrees);
 
-    protected abstract void calculate();
+    protected abstract double[] add(ParseTree goldTree, ParseTree computedTree);
 
-    public abstract void add(ParseTree tree1, ParseTree tree2);
+    public abstract double[] average(double[][] matrix);
 }

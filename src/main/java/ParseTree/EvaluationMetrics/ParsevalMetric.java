@@ -8,13 +8,6 @@ import java.util.HashSet;
 
 public class ParsevalMetric extends Metric {
 
-    private int[] precision;
-    private int[] recall;
-
-    public ParsevalMetric(File folder1, File folder2) {
-        super(folder1, folder2);
-    }
-
     private SimpleEntry<String, Integer> traverseTree(HashSet<String> set, int count, ParseNode node) {
         if (node.getChild(0).isLeaf()) {
             set.add(count + "|" + node.getData().getName());
@@ -36,43 +29,53 @@ public class ParsevalMetric extends Metric {
     }
 
     @Override
-    protected void calculate() {
-        this.precision = new int[2];
-        this.recall = new int[2];
-        for (int i = 0; i < treeBank1.size(); i++) {
-            ParseTree tree1 = treeBank1.get(i);
-            ParseTree tree2 = treeBank2.get(i);
-            add(tree1, tree2);
-        }
+    public double[][] calculate(File goldTrees, File computedTrees) {
+        TreeBank goldTreeBank = new TreeBank(goldTrees);
+        TreeBank computedTreeBank = new TreeBank(computedTrees);
+        return calculate(goldTreeBank, computedTreeBank);
     }
 
     @Override
-    public void add(ParseTree tree1, ParseTree tree2) {
+    public double[][] calculate(TreeBank goldTrees, TreeBank computedTrees) {
+        double[][] matrix = new double[goldTrees.size()][3];
+        for (int i = 0; i < goldTrees.size(); i++) {
+            matrix[i] = add(goldTrees.get(i), computedTrees.get(i));
+        }
+        return matrix;
+    }
+
+    @Override
+    public double[] add(ParseTree goldTree, ParseTree computedTree) {
+        double[] scores = new double[3];
         HashSet<String> set1 = new HashSet<>();
-        traverseTree(set1, 0, tree1.getRoot());
+        traverseTree(set1, 0, goldTree.getRoot());
         HashSet<String> set2 = new HashSet<>();
-        traverseTree(set2, 0, tree2.getRoot());
-        precision[1] += set2.size();
-        recall[1] += set1.size();
+        traverseTree(set2, 0, computedTree.getRoot());
+        int precision = 0, recall = 0;
         for (String key : set1) {
             if (set2.contains(key)) {
-                precision[0]++;
-                recall[0]++;
+                precision++;
+                recall++;
             }
         }
+        scores[0] = (precision + 0.00) / set2.size();
+        scores[1] = (recall + 0.00) / set1.size();
+        scores[2] = (2 * scores[0] * scores[1]) / (scores[0] + scores[1]);
+        return scores;
     }
 
-    public double getPrecision() {
-        return ((double) precision[0]) / precision[1];
-    }
-
-    public double getRecall() {
-        return ((double) recall[0]) / recall[1];
-    }
-
-    public double getFScore() {
-        double precision = getPrecision();
-        double recall = getRecall();
-        return (2 * precision * recall) / (precision + recall);
+    @Override
+    public double[] average(double[][] matrix) {
+        double[] average = new double[3];
+        double precision = 0, recall = 0, fScore = 0;
+        for (double[] doubles : matrix) {
+            precision += doubles[0];
+            recall += doubles[1];
+            fScore += doubles[2];
+        }
+        average[0] = (precision + 0.00) / matrix.length;
+        average[1] = (recall + 0.00) / matrix.length;
+        average[2] = (fScore + 0.00) / matrix.length;
+        return average;
     }
 }
