@@ -1,15 +1,11 @@
 package ParseTree.EvaluationMetrics;
 
-import ParseTree.ParseTree;
-import ParseTree.TreeBank;
+import ParseTree.*;
 
 import java.io.File;
 
 public abstract class Metric {
-
-    public abstract double[][] calculate(File goldTrees, File computedTrees);
-
-    public abstract double[][] calculate(TreeBank goldTrees, TreeBank computedTrees);
+    public abstract double[][] calculate(ParallelTreeBank treeBank);
 
     protected abstract double[] add(ParseTree goldTree, ParseTree computedTree);
 
