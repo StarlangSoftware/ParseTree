@@ -12,6 +12,7 @@ public class ParseTree{
             Arrays.asList("SINV", "SBARQ", "SBAR", "SQ", "S"));
 
     protected ParseNode root;
+    protected String name;
 
     /**
      * Empty constructor for ParseTree. Initializes the root node to null.
@@ -47,6 +48,14 @@ public class ParseTree{
         } catch (IOException e) {
             root = null;
         }
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
     }
 
     /**
