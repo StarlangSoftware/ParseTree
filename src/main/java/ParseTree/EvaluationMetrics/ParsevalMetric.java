@@ -2,7 +2,6 @@ package ParseTree.EvaluationMetrics;
 
 import ParseTree.*;
 
-import java.io.File;
 import java.util.AbstractMap.*;
 import java.util.HashSet;
 
@@ -29,17 +28,10 @@ public class ParsevalMetric extends Metric {
     }
 
     @Override
-    public double[][] calculate(File goldTrees, File computedTrees) {
-        TreeBank goldTreeBank = new TreeBank(goldTrees);
-        TreeBank computedTreeBank = new TreeBank(computedTrees);
-        return calculate(goldTreeBank, computedTreeBank);
-    }
-
-    @Override
-    public double[][] calculate(TreeBank goldTrees, TreeBank computedTrees) {
-        double[][] matrix = new double[goldTrees.size()][3];
-        for (int i = 0; i < goldTrees.size(); i++) {
-            matrix[i] = add(goldTrees.get(i), computedTrees.get(i));
+    public double[][] calculate(ParallelTreeBank treeBanks) {
+        double[][] matrix = new double[treeBanks.size()][3];
+        for (int i = 0; i < treeBanks.size(); i++) {
+            matrix[i] = add(treeBanks.fromTreeBank().get(i), treeBanks.toTreeBank().get(i));
         }
         return matrix;
     }
@@ -51,15 +43,14 @@ public class ParsevalMetric extends Metric {
         traverseTree(set1, 0, goldTree.getRoot());
         HashSet<String> set2 = new HashSet<>();
         traverseTree(set2, 0, computedTree.getRoot());
-        int precision = 0, recall = 0;
+        int score = 0;
         for (String key : set1) {
             if (set2.contains(key)) {
-                precision++;
-                recall++;
+                score++;
             }
         }
-        scores[0] = (precision + 0.00) / set2.size();
-        scores[1] = (recall + 0.00) / set1.size();
+        scores[0] = (score + 0.00) / set2.size();
+        scores[1] = (score + 0.00) / set1.size();
         scores[2] = (2 * scores[0] * scores[1]) / (scores[0] + scores[1]);
         return scores;
     }

@@ -8,15 +8,6 @@ import java.util.AbstractMap.*;
 
 public class LeafAncestorMetric extends LAMetric {
 
-    @Override
-    protected double calculateCell(double[][] dp, int i, int j, ArrayList<ParseNode> string1, ArrayList<ParseNode> string2) {
-        if (string1.get(i - 1).getData().getName().equals(string2.get(j - 1).getData().getName())) {
-            return Math.min(1 + Math.min(dp[i][j - 1], dp[i - 1][j]), Math.min(dp[i][j], dp[i - 1][j - 1]));
-        } else {
-            return Math.min(1 + Math.min(dp[i][j - 1], dp[i - 1][j]), Math.min(dp[i][j], dp[i - 1][j - 1] + 1));
-        }
-    }
-
     private ArrayList<ParseNode> createList(ParseNode node) {
         ArrayList<ParseNode> list = new ArrayList<>();
         ParseNode current = node.getParent().getParent();
@@ -61,5 +52,34 @@ public class LeafAncestorMetric extends LAMetric {
             map.put(i, createList(nodes.get(i)));
         }
         return map;
+    }
+
+    @Override
+    protected double[] add(ParseTree goldTree, ParseTree computedTree) {
+        double[] accuracy = new double[2];
+        HashMap<Integer, ArrayList<ParseNode>> map1 = calculateStrings(goldTree.getRoot());
+        HashMap<Integer, ArrayList<ParseNode>> map2 = calculateStrings(computedTree.getRoot());
+        for (Integer key : map1.keySet()) {
+            double[][] dp = new double[map1.get(key).size() + 1][map2.get(key).size() + 1];
+            for (int i = 0; i < map1.get(key).size() + 1; i++) {
+                dp[i][0] = i;
+            }
+            for (int i = 0; i < map2.get(key).size() + 1; i++) {
+                dp[0][i] = i;
+            }
+            for (int i = 1; i < dp.length; i++) {
+                for (int j = 1; j < dp[i].length; j++) {
+                    dp[i][j] = Double.MAX_VALUE;
+                    if (map1.get(key).get(i - 1).getData().getName().equals(map2.get(key).get(j - 1).getData().getName())) {
+                        dp[i][j] = Math.min(1 + Math.min(dp[i][j - 1], dp[i - 1][j]), Math.min(dp[i][j], dp[i - 1][j - 1]));
+                    } else {
+                        dp[i][j] = Math.min(1 + Math.min(dp[i][j - 1], dp[i - 1][j]), Math.min(dp[i][j], dp[i - 1][j - 1] + 1));
+                    }
+                }
+            }
+            accuracy[0] += ((double) (map1.get(key).size() + map2.get(key).size()) - dp[map1.get(key).size() - 1][map2.get(key).size() - 1]) / (map1.get(key).size() + map2.get(key).size());
+        }
+        accuracy[1] += map1.size();
+        return accuracy;
     }
 }
