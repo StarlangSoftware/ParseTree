@@ -4,7 +4,7 @@ import java.io.File;
 
 public class ParallelTreeBank {
 
-    private TreeBank fromTreeBank, toTreeBank;
+    protected TreeBank fromTreeBank, toTreeBank;
 
     protected void removeDifferentTrees(){
         int i, j;
