@@ -16,9 +16,9 @@ public class TreeBank {
 
     }
 
-    private void addParseTree(String fileName){
+    private void addParseTree(String path, String fileName){
         try {
-            ParseTree parseTree = new ParseTree(new FileInputStream(fileName));
+            ParseTree parseTree = new ParseTree(new FileInputStream(path));
             parseTree.setName(fileName);
             if (parseTree.getRoot() != null){
                 parseTrees.add(parseTree);
@@ -40,7 +40,7 @@ public class TreeBank {
         File[] listOfFiles = folder.listFiles();
         Arrays.sort(listOfFiles);
         for (File file:listOfFiles){
-            addParseTree(folder.getAbsolutePath() + "/" + file.getName());
+            addParseTree(folder.getAbsolutePath() + "/" + file.getName(), file.getName());
         }
     }
 
@@ -60,7 +60,7 @@ public class TreeBank {
             if (!fileName.contains(pattern)){
                 continue;
             }
-            addParseTree(folder.getAbsolutePath() + "/" + fileName);
+            addParseTree(folder.getAbsolutePath() + "/" + fileName, fileName);
         }
     }
 
@@ -76,7 +76,7 @@ public class TreeBank {
     public TreeBank(File folder, String pattern, int from, int to){
         parseTrees = new ArrayList<ParseTree>();
         for (int i = from; i <= to; i++){
-            addParseTree(folder.getAbsolutePath() + "/" + String.format("%04d", i) + pattern);
+            addParseTree(folder.getAbsolutePath() + "/" + String.format("%04d", i) + pattern, String.format("%04d", i) + pattern);
         }
     }
 
