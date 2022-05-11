@@ -30,6 +30,9 @@ public class ParallelTreeBank {
         }
     }
 
+    public ParallelTreeBank(){
+    }
+
     public ParallelTreeBank(File folder1, File folder2){
         fromTreeBank = new TreeBank(folder1);
         toTreeBank = new TreeBank(folder2);
