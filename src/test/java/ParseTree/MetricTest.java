@@ -1,6 +1,8 @@
 package ParseTree;
 
 import ParseTree.EvaluationMetrics.LeafAncestorMetric;
+import ParseTree.EvaluationMetrics.ModifiedLeafAncestorMetric;
+import ParseTree.EvaluationMetrics.ModifiedParsevalMetric;
 import ParseTree.EvaluationMetrics.ParsevalMetric;
 import org.junit.Test;
 
@@ -12,15 +14,33 @@ public class MetricTest {
 
     @Test
     public void testParseval() {
-        /*ParsevalMetric metric = new ParsevalMetric(new File("Turkish1"), new File("Turkish2"));
-        assertEquals(0.8365384615384616, metric.getPrecision(), 0.01);
-        assertEquals(0.8877551020408163, metric.getRecall(), 0.01);
-        assertEquals(0.8613861386138615, metric.getFScore(), 0.01);*/
+        ParsevalMetric metric = new ParsevalMetric();
+        double[][] matrix = metric.calculate(new ParallelTreeBank(new File("Turkish1"), new File("Turkish2")));
+        double[] vector = metric.average(matrix);
+        assertEquals(0.5060545935545936, vector[2], 0.01);
+    }
+
+    @Test
+    public void testModifiedParseval() {
+        ModifiedParsevalMetric metric = new ModifiedParsevalMetric();
+        double[][] matrix = metric.calculate(new ParallelTreeBank(new File("Turkish1"), new File("Turkish2")));
+        double[] vector = metric.average(matrix);
+        assertEquals(0.484297091103383, vector[2], 0.01);
     }
 
     @Test
     public void testLeafAncestor() {
-        /*LeafAncestorMetric metric = new LeafAncestorMetric(new File("Turkish1"), new File("Turkish2"));
-        assertEquals(0.9032375913328291, metric.getAccuracy(), 0.01);*/
+        LeafAncestorMetric metric = new LeafAncestorMetric();
+        double[][] matrix = metric.calculate(new ParallelTreeBank(new File("Turkish1"), new File("Turkish2")));
+        double[] vector = metric.average(matrix);
+        assertEquals(0.8560941043083901, vector[0] / vector[1], 0.01);
+    }
+
+    @Test
+    public void testModifiedLeafAncestor() {
+        ModifiedLeafAncestorMetric metric = new ModifiedLeafAncestorMetric();
+        double[][] matrix = metric.calculate(new ParallelTreeBank(new File("Turkish1"), new File("Turkish2")));
+        double[] vector = metric.average(matrix);
+        assertEquals(0.8741496598639455, vector[0] / vector[1], 0.01);
     }
 }

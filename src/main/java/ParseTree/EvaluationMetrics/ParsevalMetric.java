@@ -7,7 +7,7 @@ import java.util.HashSet;
 
 public class ParsevalMetric extends Metric {
 
-    private SimpleEntry<String, Integer> traverseTree(HashSet<String> set, int count, ParseNode node) {
+    protected SimpleEntry<String, Integer> traverseTree(HashSet<String> set, int count, ParseNode node) {
         if (node.getChild(0).isLeaf()) {
             set.add(count + "|" + node.getData().getName());
             return new SimpleEntry<>(String.valueOf(count), count + 1);
@@ -45,8 +45,14 @@ public class ParsevalMetric extends Metric {
         traverseTree(set2, 0, computedTree.getRoot());
         int score = 0;
         for (String key : set1) {
-            if (set2.contains(key)) {
-                score++;
+            if (key.contains("-PRI")) {
+                if (set2.contains(key.substring(0, key.length() - 4))) {
+                    score++;
+                }
+            } else {
+                if (set2.contains(key)) {
+                    score++;
+                }
             }
         }
         scores[0] = (score + 0.00) / set2.size();

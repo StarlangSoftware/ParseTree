@@ -6,7 +6,7 @@ import ParseTree.NodeCondition.IsLeaf;
 import java.util.*;
 import java.util.AbstractMap.*;
 
-public class LeafAncestorMetric extends LAMetric {
+public class LeafAncestorMetric extends Metric {
 
     private ArrayList<ParseNode> createList(ParseNode node) {
         ArrayList<ParseNode> list = new ArrayList<>();
@@ -70,7 +70,11 @@ public class LeafAncestorMetric extends LAMetric {
             for (int i = 1; i < dp.length; i++) {
                 for (int j = 1; j < dp[i].length; j++) {
                     dp[i][j] = Double.MAX_VALUE;
-                    if (map1.get(key).get(i - 1).getData().getName().equals(map2.get(key).get(j - 1).getData().getName())) {
+                    String string1 = map1.get(key).get(i - 1).getData().getName(), string2 = map2.get(key).get(j - 1).getData().getName();
+                    if (string1.contains("-PRI")) {
+                        string1 = string1.substring(0, string1.length() - 4);
+                    }
+                    if (string1.equals(string2)) {
                         dp[i][j] = Math.min(1 + Math.min(dp[i][j - 1], dp[i - 1][j]), Math.min(dp[i][j], dp[i - 1][j - 1]));
                     } else {
                         dp[i][j] = Math.min(1 + Math.min(dp[i][j - 1], dp[i - 1][j]), Math.min(dp[i][j], dp[i - 1][j - 1] + 1));
@@ -81,5 +85,24 @@ public class LeafAncestorMetric extends LAMetric {
         }
         accuracy[1] += map1.size();
         return accuracy;
+    }
+
+    @Override
+    public double[][] calculate(ParallelTreeBank treeBanks) {
+        double[][] matrix = new double[treeBanks.size()][2];
+        for (int i = 0; i < treeBanks.size(); i++) {
+            matrix[i] = add(treeBanks.fromTreeBank().get(i), treeBanks.toTreeBank().get(i));
+        }
+        return matrix;
+    }
+
+    @Override
+    public double[] average(double[][] matrix) {
+        double[] average = new double[2];
+        for (double[] doubles : matrix) {
+            average[0] += doubles[0];
+            average[1] += doubles[1];
+        }
+        return average;
     }
 }
