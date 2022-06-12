@@ -7,6 +7,11 @@ Annotated treebanks can be categorised as constituency treebanks and dependency 
 
 The very first comprehensive annotated treebank, the Penn Treebank, was created for the English language and offers 40,000 annotated sentences. Following the Penn Treebank, numerous treebanks annotated for constituency structures were developed in different languages including French, German, Finnish, Hungarian, Chinese and Arabic.
 
+Video Lectures
+============
+
+[<img src=video1.jpg width="50%">](https://youtu.be/fY8tn8ny0m4)
+
 For Developers
 ============
 
