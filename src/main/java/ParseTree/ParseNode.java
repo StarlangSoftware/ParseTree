@@ -532,24 +532,7 @@ public class ParseNode {
             if (!excludeStopWords){
                 sum = 1;
             } else {
-                if (Word.isPunctuation(data.getName())
-                        || data.getName().contains("*") || data.getName().equalsIgnoreCase("at") || data.getName().equalsIgnoreCase("the")
-                        || data.getName().equalsIgnoreCase("to") || data.getName().equalsIgnoreCase("a") || data.getName().equalsIgnoreCase("an")
-                        || data.getName().equalsIgnoreCase("not") || data.getName().equalsIgnoreCase("is") || data.getName().equalsIgnoreCase("was")
-                        || data.getName().equalsIgnoreCase("were") || data.getName().equalsIgnoreCase("have") || data.getName().equalsIgnoreCase("had")
-                        || data.getName().equalsIgnoreCase("has")
-                        || data.getName().equalsIgnoreCase("by") || data.getName().equalsIgnoreCase("on")
-                        || data.getName().equalsIgnoreCase("off") || data.getName().equalsIgnoreCase("'s") || data.getName().equalsIgnoreCase("n't")
-                        || data.getName().equalsIgnoreCase("can") || data.getName().equalsIgnoreCase("could") || data.getName().equalsIgnoreCase("may")
-                        || data.getName().equalsIgnoreCase("might") || data.getName().equalsIgnoreCase("will") || data.getName().equalsIgnoreCase("would")
-                        || data.getName().equalsIgnoreCase("as") || data.getName().equalsIgnoreCase("with")
-                        || data.getName().equalsIgnoreCase("for") || data.getName().equalsIgnoreCase("will") || data.getName().equalsIgnoreCase("would")
-                        || data.getName().equalsIgnoreCase("than") || data.getName().equalsIgnoreCase("$")
-                        || data.getName().equalsIgnoreCase("and") || data.getName().equalsIgnoreCase("or") || data.getName().equalsIgnoreCase("of")
-                        || data.getName().equalsIgnoreCase("are") || data.getName().equalsIgnoreCase("be") || data.getName().equalsIgnoreCase("been")
-                        || data.getName().equalsIgnoreCase("do") || data.getName().equalsIgnoreCase("few") || data.getName().equalsIgnoreCase("there")
-                        || data.getName().equalsIgnoreCase("up") || data.getName().equalsIgnoreCase("down") || data.getName().equalsIgnoreCase("in")
-                        || data.getName().equalsIgnoreCase("'re")) {
+                if (Word.isPunctuation(data.getName()) || data.getName().contains("*") || Word.isEnglishStopWord(data.getName())) {
                     sum = 0;
                 } else {
                     sum = 1;
