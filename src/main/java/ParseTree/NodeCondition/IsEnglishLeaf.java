@@ -13,10 +13,7 @@ public class IsEnglishLeaf extends IsLeaf{
         if (super.satisfies(parseNode)) {
             String data = parseNode.getData().getName();
             String parentData = parseNode.getParent().getData().getName();
-            if (data.contains("*") || (data.equals("0") && parentData.equals("-NONE-"))){
-                return false;
-            }
-            return true;
+            return !data.contains("*") && (!data.equals("0") || !parentData.equals("-NONE-"));
         }
         return false;
     }

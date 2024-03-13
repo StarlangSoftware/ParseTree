@@ -9,34 +9,34 @@ public class ParseNode {
     protected ArrayList<ParseNode> children = new ArrayList<>();
     protected ParseNode parent = null;
     protected Symbol data = null;
-    private static String[] ADJP = new String[]{"NNS", "QP", "NN", "$", "ADVP", "JJ", "VBN", "VBG", "ADJP", "JJR", "NP", "JJS", "DT", "FW", "RBR", "RBS", "SBAR", "RB"};
-    private static String[] ADVP = new String[]{"RB", "RBR", "RBS", "FW", "ADVP", "TO", "CD", "JJR", "JJ", "IN", "NP", "JJS", "NN"};
-    private static String[] CONJP = new String[]{"CC", "RB", "IN"};
-    private static String[] FRAG = new String[]{};
-    private static String[] INTJ = new String[]{};
-    private static String[] LST = new String[]{"LS", ":"};
-    private static String[] NAC = new String[]{"NN", "NNS", "NNP", "NNPS", "NP", "NAC", "EX", "$", "CD", "QP", "PRP", "VBG", "JJ", "JJS", "JJR", "ADJP", "FW"};
-    private static String[] PP = new String[]{"IN", "TO", "VBG", "VBN", "RP", "FW"};
-    private static String[] PRN = new String[]{};
-    private static String[] PRT = new String[]{"RP"};
-    private static String[] QP = new String[]{"$", "IN", "NNS", "NN", "JJ", "RB", "DT", "CD", "NCD", "QP", "JJR", "JJS"};
-    private static String[] RRC = new String[]{"VP", "NP", "ADVP", "ADJP", "PP"};
-    private static String[] S = new String[]{"TO", "IN", "VP", "S", "SBAR", "ADJP", "UCP", "NP"};
-    private static String[] SBAR = new String[]{"WHNP", "WHPP", "WHADVP", "WHADJP", "IN", "DT", "S", "SQ", "SINV", "SBAR", "FRAG"};
-    private static String[] SBARQ = new String[]{"SQ", "S", "SINV", "SBARQ", "FRAG"};
-    private static String[] SINV = new String[]{"VBZ", "VBD", "VBP", "VB", "MD", "VP", "S", "SINV", "ADJP", "NP"};
-    private static String[] SQ = new String[]{"VBZ", "VBD", "VBP", "VB", "MD", "VP", "SQ"};
-    private static String[] UCP = new String[]{};
-    private static String[] VP = new String[]{"TO", "VBD", "VBN", "MD", "VBZ", "VB", "VBG", "VBP", "VP", "ADJP", "NN", "NNS", "NP"};
-    private static String[] WHADJP = new String[]{"CC", "WRB", "JJ", "ADJP"};
-    private static String[] WHADVP = new String[]{"CC", "WRB"};
-    private static String[] WHNP = new String[]{"WDT", "WP", "WP$", "WHADJP", "WHPP", "WHNP"};
-    private static String[] WHPP = new String[]{"IN", "TO", "FW"};
-    private static String[] NP1 = new String[]{"NN", "NNP", "NNPS", "NNS", "NX", "POS", "JJR"};
-    private static String[] NP2 = new String[]{"NP"};
-    private static String[] NP3 = new String[]{"$", "ADJP", "PRN"};
-    private static String[] NP4 = new String[]{"CD"};
-    private static String[] NP5 = new String[]{"JJ" , "JJS", "RB", "QP"};
+    private static final String[] ADJP = new String[]{"NNS", "QP", "NN", "$", "ADVP", "JJ", "VBN", "VBG", "ADJP", "JJR", "NP", "JJS", "DT", "FW", "RBR", "RBS", "SBAR", "RB"};
+    private static final String[] ADVP = new String[]{"RB", "RBR", "RBS", "FW", "ADVP", "TO", "CD", "JJR", "JJ", "IN", "NP", "JJS", "NN"};
+    private static final String[] CONJP = new String[]{"CC", "RB", "IN"};
+    private static final String[] FRAG = new String[]{};
+    private static final String[] INTJ = new String[]{};
+    private static final String[] LST = new String[]{"LS", ":"};
+    private static final String[] NAC = new String[]{"NN", "NNS", "NNP", "NNPS", "NP", "NAC", "EX", "$", "CD", "QP", "PRP", "VBG", "JJ", "JJS", "JJR", "ADJP", "FW"};
+    private static final String[] PP = new String[]{"IN", "TO", "VBG", "VBN", "RP", "FW"};
+    private static final String[] PRN = new String[]{};
+    private static final String[] PRT = new String[]{"RP"};
+    private static final String[] QP = new String[]{"$", "IN", "NNS", "NN", "JJ", "RB", "DT", "CD", "NCD", "QP", "JJR", "JJS"};
+    private static final String[] RRC = new String[]{"VP", "NP", "ADVP", "ADJP", "PP"};
+    private static final String[] S = new String[]{"TO", "IN", "VP", "S", "SBAR", "ADJP", "UCP", "NP"};
+    private static final String[] SBAR = new String[]{"WHNP", "WHPP", "WHADVP", "WHADJP", "IN", "DT", "S", "SQ", "SINV", "SBAR", "FRAG"};
+    private static final String[] SBARQ = new String[]{"SQ", "S", "SINV", "SBARQ", "FRAG"};
+    private static final String[] SINV = new String[]{"VBZ", "VBD", "VBP", "VB", "MD", "VP", "S", "SINV", "ADJP", "NP"};
+    private static final String[] SQ = new String[]{"VBZ", "VBD", "VBP", "VB", "MD", "VP", "SQ"};
+    private static final String[] UCP = new String[]{};
+    private static final String[] VP = new String[]{"TO", "VBD", "VBN", "MD", "VBZ", "VB", "VBG", "VBP", "VP", "ADJP", "NN", "NNS", "NP"};
+    private static final String[] WHADJP = new String[]{"CC", "WRB", "JJ", "ADJP"};
+    private static final String[] WHADVP = new String[]{"CC", "WRB"};
+    private static final String[] WHNP = new String[]{"WDT", "WP", "WP$", "WHADJP", "WHPP", "WHNP"};
+    private static final String[] WHPP = new String[]{"IN", "TO", "FW"};
+    private static final String[] NP1 = new String[]{"NN", "NNP", "NNPS", "NNS", "NX", "POS", "JJR"};
+    private static final String[] NP2 = new String[]{"NP"};
+    private static final String[] NP3 = new String[]{"$", "ADJP", "PRN"};
+    private static final String[] NP4 = new String[]{"CD"};
+    private static final String[] NP5 = new String[]{"JJ" , "JJS", "RB", "QP"};
 
     /**
      * Empty constructor for ParseNode class.
@@ -53,7 +53,7 @@ public class ParseNode {
      */
     public ParseNode(ParseNode parent, String line, boolean isLeaf){
         int parenthesisCount = 0;
-        String childLine = "";
+        StringBuilder childLine = new StringBuilder();
         this.parent = parent;
         if (isLeaf){
             data = new Symbol(line);
@@ -64,7 +64,7 @@ public class ParseNode {
             } else {
                 for (int i = line.indexOf(" ") + 1; i < line.length(); i++){
                     if (line.charAt(i) != ' ' || parenthesisCount > 0){
-                        childLine = childLine + line.charAt(i);
+                        childLine.append(line.charAt(i));
                     }
                     if (line.charAt(i) == '('){
                         parenthesisCount++;
@@ -73,9 +73,9 @@ public class ParseNode {
                             parenthesisCount--;
                         }
                     }
-                    if (parenthesisCount == 0 && !childLine.isEmpty()){
-                        children.add(new ParseNode(this, childLine.trim(), false));
-                        childLine = "";
+                    if (parenthesisCount == 0 && (childLine.length() > 0)){
+                        children.add(new ParseNode(this, childLine.toString().trim(), false));
+                        childLine = new StringBuilder();
                     }
                 }
             }
@@ -110,7 +110,7 @@ public class ParseNode {
     }
 
     /**
-     * Another simple constructor for ParseNode. It only take input the data, and sets it.
+     * Another simple constructor for ParseNode. It only can take input the data, and sets it.
      * @param data Data for this node.
      */
     public ParseNode(Symbol data){
@@ -163,7 +163,7 @@ public class ParseNode {
      * @return Head node of the descendant leaves of this current node.
      */
     public ParseNode headLeaf(){
-        if (children.size() > 0){
+        if (!children.isEmpty()){
             ParseNode head = headChild();
             if (head != null){
                 return head.headLeaf();
@@ -266,7 +266,7 @@ public class ParseNode {
 
     /**
      * Returns an iterator for the child nodes of this {@link ParseNode}.
-     * @return Iterator for the children of thid very node.
+     * @return Iterator for the children of this very node.
      */
     public Iterator<ParseNode> getChildIterator(){
          return children.iterator();
@@ -347,7 +347,7 @@ public class ParseNode {
      * @return Number of all leaf nodes in the current subtree.
      */
     public int leafCount(){
-        if (children.size() == 0){
+        if (children.isEmpty()){
             return 1;
         } else {
             int sum = 0;
@@ -363,7 +363,7 @@ public class ParseNode {
      * @return Number of all nodes in the current subtree.
      */
     public int nodeCount(){
-        if (children.size() > 0){
+        if (!children.isEmpty()){
             int sum = 1;
             for (ParseNode child: children){
                 sum += child.nodeCount();
@@ -375,9 +375,9 @@ public class ParseNode {
     }
 
     /**
-     * Recursive method to calculate the number of all nodes, which have more than one children, in the subtree rooted
+     * Recursive method to calculate the number of all nodes, which have more than one child, in the subtree rooted
      * with this current node.
-     * @return Number of all nodes, which have more than one children, in the current subtree.
+     * @return Number of all nodes, which have more than one child, in the current subtree.
      */
     public int nodeCountWithMultipleChildren(){
         if (children.size() > 1){
@@ -409,7 +409,7 @@ public class ParseNode {
     }
 
     /**
-     * Returns the i'th child of this node.
+     * Returns the child i of this node.
      * @param i Index of the retrieved node.
      * @return i'th child of this node.
      */
@@ -528,7 +528,7 @@ public class ParseNode {
      */
     public int wordCount(boolean excludeStopWords){
         int sum;
-        if (children.size() == 0){
+        if (children.isEmpty()){
             if (!excludeStopWords){
                 sum = 1;
             } else {
@@ -554,7 +554,7 @@ public class ParseNode {
      * @param list Returned span list.
      */
     void constituentSpanList(int startIndex, ArrayList<ConstituentSpan> list){
-        if (children.size() > 0){
+        if (!children.isEmpty()){
             list.add(new ConstituentSpan(data, startIndex, startIndex + leafCount()));
         }
         int total = 0;
@@ -569,7 +569,7 @@ public class ParseNode {
      * @return true if this node is leaf, false otherwise.
      */
     public boolean isLeaf(){
-        return children.size() == 0;
+        return children.isEmpty();
     }
 
     /**
@@ -585,7 +585,7 @@ public class ParseNode {
      * @return A sentence which contains all words in the subtree rooted at this node.
      */
     public String toSentence(){
-        if (children.size() == 0){
+        if (children.isEmpty()){
             if (getData() != null && !isDummyNode()){
                 return " " + getData().getName().replaceAll("-LRB-", "(").replaceAll("-RRB-", ")").replaceAll("-LSB-", "[").replaceAll("-RSB-", "]").replaceAll("-LCB-", "{").replaceAll("-RCB-", "}").replaceAll("-lrb-", "(").replaceAll("-rrb-", ")").replaceAll("-lsb-", "[").replaceAll("-rsb-", "]").replaceAll("-lcb-", "{").replaceAll("-rcb-", "}");
             } else {
@@ -596,11 +596,11 @@ public class ParseNode {
                 }
             }
         } else {
-            String st = "";
+            StringBuilder st = new StringBuilder();
             for (ParseNode aChild : children) {
-                st = st + aChild.toSentence();
+                st.append(aChild.toSentence());
             }
-            return st;
+            return st.toString();
         }
     }
 
@@ -610,15 +610,15 @@ public class ParseNode {
      */
     public String toString(){
         if (children.size() < 2){
-            if (children.size() < 1){
+            if (children.isEmpty()){
                 return getData().getName();
             } else {
                 return "(" + data.getName() + " " + firstChild().toString() + ")";
             }
         } else {
-            String st = "(" + data.getName();
+            StringBuilder st = new StringBuilder("(" + data.getName());
             for (ParseNode aChild : children) {
-                st = st + " " + aChild.toString();
+                st.append(" ").append(aChild.toString());
             }
             return st + ") ";
         }

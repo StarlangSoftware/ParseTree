@@ -5,8 +5,8 @@ import ParseTree.NodeCondition.NodeCondition;
 import java.util.ArrayList;
 
 public class NodeCollector {
-    private NodeCondition condition;
-    private ParseNode rootNode;
+    private final NodeCondition condition;
+    private final ParseNode rootNode;
 
     /**
      * Constructor for the NodeCollector class. NodeCollector's main aim is to collect a set of ParseNode's from a
@@ -39,7 +39,7 @@ public class NodeCollector {
      * @return All ParseNode's satisfying the node condition.
      */
     public ArrayList<ParseNode> collect(){
-        ArrayList<ParseNode> result = new ArrayList<ParseNode>();
+        ArrayList<ParseNode> result = new ArrayList<>();
         collectNodes(rootNode, result);
         return result;
     }

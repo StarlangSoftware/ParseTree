@@ -1,9 +1,9 @@
 package ParseTree;
 
 public class ConstituentSpan {
-    private Symbol constituent;
-    private int start;
-    private int end;
+    private final Symbol constituent;
+    private final int start;
+    private final int end;
 
     public Symbol getConstituent() {
         return constituent;

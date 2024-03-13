@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Symbol extends Word {
-    ArrayList<String> nonTerminalList = new ArrayList<String>(Arrays.asList("ADJP", "ADVP", "CC", "CD", "CONJP", "DT", "EX", "FRAG", "FW", "IN", "INTJ", "JJ", "JJR", "JJS", "LS",
+    ArrayList<String> nonTerminalList = new ArrayList<>(Arrays.asList("ADJP", "ADVP", "CC", "CD", "CONJP", "DT", "EX", "FRAG", "FW", "IN", "INTJ", "JJ", "JJR", "JJS", "LS",
             "LST", "MD", "NAC", "NN", "NNP", "NNPS", "NNS", "NP", "NX", "PDT", "POS", "PP", "PRN", "PRP", "PRP$", "PRT",
             "PRT|ADVP", "QP", "RB", "RBR", "RP", "RRC", "S", "SBAR", "SBARQ", "SINV", "SQ", "SYM", "TO", "UCP", "UH", "VB", "VBD", "VBG", "VBN",
             "VBP", "VBZ", "VP", "WDT", "WHADJP", "WHADVP", "WHNP", "WP", "WP$", "WRB", "X", "-NONE-"));
-    ArrayList<String> phraseLabels = new ArrayList<String>(
+    ArrayList<String> phraseLabels = new ArrayList<>(
             Arrays.asList("NP", "PP", "ADVP", "ADJP", "CC", "VG"));
-    ArrayList<String> sentenceLabels = new ArrayList<String>(
+    ArrayList<String> sentenceLabels = new ArrayList<>(
             Arrays.asList("SINV","SBARQ","SBAR","SQ","S"));
-    ArrayList<String> verbLabels = new ArrayList<String>(
+    ArrayList<String> verbLabels = new ArrayList<>(
             Arrays.asList("VB", "VBD", "VBG", "VBN","VBP", "VBZ", "VERB"));
     String VPLabel = "VP";
 
@@ -70,9 +70,7 @@ public class Symbol extends Word {
      * @return True if this symbol can be a chunk label, false otherwise.
      */
     public boolean isChunkLabel(){
-        if (Word.isPunctuation(name) || sentenceLabels.contains(name.replaceAll("-.*","")) || phraseLabels.contains(name.replaceAll("-.*", "")))
-            return true;
-        return false;
+        return Word.isPunctuation(name) || sentenceLabels.contains(name.replaceAll("-.*", "")) || phraseLabels.contains(name.replaceAll("-.*", ""));
     }
 
     /**

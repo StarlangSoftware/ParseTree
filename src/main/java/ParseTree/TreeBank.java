@@ -25,8 +25,7 @@ public class TreeBank {
             } else {
                 System.out.println("Parse Tree " + fileName + " can not be read");
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ignored) {
         }
     }
 
@@ -36,11 +35,13 @@ public class TreeBank {
      * @param folder Folder where all parseTrees reside.
      */
     public TreeBank(File folder){
-        parseTrees = new ArrayList<ParseTree>();
+        parseTrees = new ArrayList<>();
         File[] listOfFiles = folder.listFiles();
-        Arrays.sort(listOfFiles);
-        for (File file:listOfFiles){
-            addParseTree(folder.getAbsolutePath() + "/" + file.getName(), file.getName());
+        if (listOfFiles != null){
+            Arrays.sort(listOfFiles);
+            for (File file:listOfFiles){
+                addParseTree(folder.getAbsolutePath() + "/" + file.getName(), file.getName());
+            }
         }
     }
 
@@ -52,20 +53,22 @@ public class TreeBank {
      * @param pattern File pattern such as "." ".train" ".test".
      */
     public TreeBank(File folder, String pattern){
-        parseTrees = new ArrayList<ParseTree>();
+        parseTrees = new ArrayList<>();
         File[] listOfFiles = folder.listFiles();
-        Arrays.sort(listOfFiles);
-        for (File file:listOfFiles){
-            String fileName = file.getName();
-            if (!fileName.contains(pattern)){
-                continue;
+        if (listOfFiles != null){
+            Arrays.sort(listOfFiles);
+            for (File file:listOfFiles){
+                String fileName = file.getName();
+                if (!fileName.contains(pattern)){
+                    continue;
+                }
+                addParseTree(folder.getAbsolutePath() + "/" + fileName, fileName);
             }
-            addParseTree(folder.getAbsolutePath() + "/" + fileName, fileName);
         }
     }
 
     /**
-     * A constructor of {@link TreeBank} class which reads the files numbered from from to to with the file name
+     * A constructor of {@link TreeBank} class which reads the files numbered from 'from' to 'to' with the file name
      * satisfying the given pattern inside the given folder. For each file inside that folder, the constructor
      * creates a ParseTree and puts in inside the list parseTrees.
      * @param folder Folder where all parseTrees reside.
@@ -74,7 +77,7 @@ public class TreeBank {
      * @param to Ending index for the ParseTrees read.
      */
     public TreeBank(File folder, String pattern, int from, int to){
-        parseTrees = new ArrayList<ParseTree>();
+        parseTrees = new ArrayList<>();
         for (int i = from; i <= to; i++){
             addParseTree(folder.getAbsolutePath() + "/" + String.format("%04d", i) + pattern, String.format("%04d", i) + pattern);
         }

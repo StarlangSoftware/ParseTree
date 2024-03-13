@@ -4,11 +4,13 @@ import ParseTree.NodeCondition.IsEnglishLeaf;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ParseTree{
-    private static ArrayList<String> sentenceLabels = new ArrayList<String>(
+    private static final ArrayList<String> sentenceLabels = new ArrayList<>(
             Arrays.asList("SINV", "SBARQ", "SBAR", "SQ", "S"));
 
     protected ParseNode root;
@@ -91,8 +93,8 @@ public class ParseTree{
     }
 
     /**
-     * Calls recursive method to calculate the number of all nodes, which have more than one children.
-     * @return Number of all nodes, which have more than one children.
+     * Calls recursive method to calculate the number of all nodes, which have more than one child.
+     * @return Number of all nodes, which have more than one child.
      */
     public int nodeCountWithMultipleChildren(){
         return root.nodeCountWithMultipleChildren();
@@ -115,10 +117,7 @@ public class ParseTree{
     }
 
     public boolean isFullSentence(){
-        if (root != null && sentenceLabels.contains(root.data.getName())){
-            return true;
-        }
-        return false;
+        return root != null && sentenceLabels.contains(root.data.getName());
     }
 
     /**
@@ -128,10 +127,10 @@ public class ParseTree{
     public void save(String fileName){
         BufferedWriter fw;
         try {
-            fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8));
-            fw.write("( " + this.toString() + " )\n");
+            fw = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get(fileName)), StandardCharsets.UTF_8));
+            fw.write("( " + this + " )\n");
             fw.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
@@ -140,7 +139,7 @@ public class ParseTree{
      * @return A list of constituents in the parse tree and their spans.
      */
     public ArrayList<ConstituentSpan> constituentSpanList(){
-        ArrayList<ConstituentSpan> result = new ArrayList<ConstituentSpan>();
+        ArrayList<ConstituentSpan> result = new ArrayList<>();
         if (root != null){
             root.constituentSpanList(1, result);
         }
