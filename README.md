@@ -98,7 +98,7 @@ Use below line to generate jar file:
         <dependency>
             <groupId>io.github.starlangsoftware</groupId>
             <artifactId>ParseTree</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.15</version>
         </dependency>
 
 Detailed Description
