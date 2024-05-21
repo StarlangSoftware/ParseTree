@@ -16,6 +16,11 @@ public class TreeBank {
 
     }
 
+    /**
+     * Adds a parse tree to the treebank.
+     * @param path Path of the parse tree file
+     * @param fileName Name of the parse tree file.
+     */
     private void addParseTree(String path, String fileName){
         try {
             ParseTree parseTree = new ParseTree(new FileInputStream(path));
@@ -123,6 +128,10 @@ public class TreeBank {
         return parseTrees.get(index);
     }
 
+    /**
+     * Removes the parse tree at position index from the treebank.
+     * @param index Position of the tree in the treebank.
+     */
     public void removeTree(int index){
         parseTrees.remove(index);
     }

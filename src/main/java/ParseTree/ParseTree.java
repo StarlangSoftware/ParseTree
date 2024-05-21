@@ -52,10 +52,18 @@ public class ParseTree{
         }
     }
 
+    /**
+     * Mutator for the name attribute.
+     * @param name Name of the parse tree.
+     */
     public void setName(String name){
         this.name = name;
     }
 
+    /**
+     * Accessor for the name attribute.
+     * @return Name of the parse tree.
+     */
     public String getName(){
         return name;
     }
@@ -116,6 +124,10 @@ public class ParseTree{
         return root.leafCount();
     }
 
+    /**
+     * Checks if the sentence is a full sentence or not. A sentence is a full sentence is its root tag is S, SINV, etc.
+     * @return True if the sentence is a full sentence, false otherwise.
+     */
     public boolean isFullSentence(){
         return root != null && sentenceLabels.contains(root.data.getName());
     }
