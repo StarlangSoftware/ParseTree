@@ -6,6 +6,19 @@ public class ConstituentSpan {
     private final int end;
 
     /**
+     * Constructor for the ConstituentSpan class. ConstituentSpan is a structure for storing constituents or phrases in
+     * a sentence with a specific label. Sets the attributes.
+     * @param constituent Label of the span.
+     * @param start Start index of the span.
+     * @param end End index of the span.
+     */
+    public ConstituentSpan(Symbol constituent, int start, int end) {
+        this.constituent = constituent;
+        this.start = start;
+        this.end = end;
+    }
+
+    /**
      * Accessor for the constituent attribute
      * @return Current constituent
      */
@@ -27,18 +40,5 @@ public class ConstituentSpan {
      */
     public int getEnd() {
         return end;
-    }
-
-    /**
-     * Constructor for the ConstituentSpan class. ConstituentSpan is a structure for storing constituents or phrases in
-     * a sentence with a specific label. Sets the attributes.
-     * @param constituent Label of the span.
-     * @param start Start index of the span.
-     * @param end End index of the span.
-     */
-    public ConstituentSpan(Symbol constituent, int start, int end) {
-        this.constituent = constituent;
-        this.start = start;
-        this.end = end;
     }
 }
