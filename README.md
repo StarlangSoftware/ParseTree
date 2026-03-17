@@ -12,11 +12,6 @@ Video Lectures
 
 [<img src=video1.jpg width="50%">](https://youtu.be/fY8tn8ny0m4)[<img src=video2.jpg width="50%">](https://youtu.be/aNGrV3DkzAg)[<img src=video3.jpg width="50%">](https://youtu.be/78KXo9tHcqQ)
 
-Class Diagram
-============
-
-<img src="classDiagram.png">
-
 For Developers
 ============
 
@@ -179,6 +174,10 @@ above methods can be used.
 
 For Contibutors
 ============
+
+### Class diagram
+
+<img src="classDiagram.png">
 
 ### pom.xml file
 1. Standard setup for packaging is similar to:
